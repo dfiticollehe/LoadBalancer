@@ -31,38 +31,39 @@ A custom-built **Load Balancer** in Java with core production-grade features lik
 
 ## 📁 Project Structure
 
+```
 src/main/java/com/loadbalancer/
 │
 ├── Main.java # Spring Boot main entry (CommandLineRunner)
 │
 ├── model/
-│ └── BackendServer.java # Server metadata + CircuitBreaker
+│   └── BackendServer.java # Server metadata + CircuitBreaker
 │
 ├── core/
-│ └── LoadBalancer.java # Load balancing logic
+│   └── LoadBalancer.java # Load balancing logic
 │
 ├── strategy/
-│ ├── LoadBalancingStrategy.java
-│ ├── WeightedRoundRobinStrategy.java
-│ └── HealthAwareStrategy.java
+│   ├── LoadBalancingStrategy.java
+│   ├── WeightedRoundRobinStrategy.java
+│   └── HealthAwareStrategy.java
 │
 ├── server/
-│ ├── LBRequestServer.java # Accepts client socket connections
-│ └── Worker.java # Handles request forwarding + retry logic
+│   ├── LBRequestServer.java # Accepts client socket connections
+│   └── Worker.java # Handles request forwarding + retry logic
 │
 ├── service/
-│ ├── HealthMonitor.java
-│ ├── HealthChecker.java
-│ ├── AdminController.java # Spring Boot REST controller (register/deregister)
-│ └── RateLimiter.java # Interface for backend rate limiting
+│   ├── HealthMonitor.java
+│   ├── HealthChecker.java
+│   ├── AdminController.java # Spring Boot REST controller (register/deregister)
+│   └── RateLimiter.java # Interface for backend rate limiting
 │
 ├── circuitbreaker/
-│ ├── CircuitBreaker.java
-│ └── CircuitState.java
+│   ├── CircuitBreaker.java
+│   └── CircuitState.java
 │
 └── dto/
-└── GeneralResponse.java # Wrapper for API responses
-
+    └── GeneralResponse.java # Wrapper for API responses
+```
 
 ---
 
@@ -91,15 +92,22 @@ Implements `LoadBalancingStrategy`:
 - Plugged using strategy pattern.
 
 ### 6. Admin API
+
 ```http
 POST /admin/register
 Body: localhost:20001
 
 POST /admin/deregister
 Body: localhost:20001
+```
 
-▶️ Running
+---
+
+## ▶️ Running
+
+```bash
 mvn clean install
 java -jar target/loadbalancer-1.0-SNAPSHOT.jar
+```
 
-Make sure your backend services are running on ports like 20001, 20002, 20003
+Make sure your backend services are running on ports like `20001`, `20002`, `20003`.
